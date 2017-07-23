@@ -1,0 +1,50 @@
+- Configured mod.config (by hand, ofc)
+- Soft link my forked engine as ./engine
+- Have the engine compiled.
+- Removed OpenRA.Mods.Example
+- Soft link common, ra and yupgi_alert into ./mods
+- Make sure that in mod.config, MOD_ID == yupgi_alert !
+- launch-game.cmd runs my mod OK.
+- Erm... I can't do packaging on Windows haha
+  https://github.com/OpenRA/OpenRAModSDK says:
+  <not available>
+- Fortunately I have Babun (friendly Cygwin)
+- ARGH dos2unix all .sh scripts in packaging
+- dos2unix mod.config
+- FAILED.
+
+--------------------------------------------------------------------------------
+Building Windows package
+Windows packaging requires makensis.
+Windows package build failed.
+Building macOS package
+Building launcher
+Building core files
+D:/bin/babun/.babun/cygwin/bin/make.exe: error while loading shared libraries: ?: cannot open shared object file: No such file or directory
+D:/bin/babun/.babun/cygwin/bin/make.exe: error while loading shared libraries: ?: cannot open shared object file: No such file or directory
+D:/bin/babun/.babun/cygwin/bin/make.exe: error while loading shared libraries: ?: cannot open shared object file: No such file or directory
+D:/bin/babun/.babun/cygwin/bin/make.exe: error while loading shared libraries: ?: cannot open shared object file: No such file or directory
+D:/bin/babun/.babun/cygwin/bin/make.exe: error while loading shared libraries: ?: cannot open shared object file: No such file or directory
+cp: target '/cygdrive/d/work/OpenRAModSDK/packaging/osx/build/OpenRA.app/Contents/Resources/mods' is not a directory
+cp: cannot stat 'yupgi_alert.icns': No such file or directory
+Packaging zip archive
+Package build done.
+--------------------------------------------------------------------------------
+
+- Take 2, on a Linux box.
+- Make the engine, manually.
+- Soft link the engine as ./engine
+- Can't launch the game on a Linux box remotely but oh well... Skip this one.
+- Now for packaging.
+- $ bash packaging/package-all.sh r015 tmp
+- I don't have makensis so... installing.
+  yaourt -S nsis2
+- Now I get:
+error CS7064: Error opening icon file `yupgi_alert.ico'. Could not find file "/home/jdj/mod/O
+penRAModSDK/packaging/windows/yupgi_alert.ico".
+- Time to make an icon for my mod :)
+  Added icon.png. Generated icon.ico from it.
+- Seems to run fine now.
+- You need to provide ico
+- Put mods/yupgi_alert as a real folder, not soft link.
+- packaging/package-all.sh : the parameter, outputdir must be ABSOLUTE.
