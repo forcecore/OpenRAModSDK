@@ -174,3 +174,7 @@ endif
 test: utility
 	@echo "Testing $(MOD_ID) mod MiniYAML..."
 	@MOD_SEARCH_PATHS="$(MOD_SEARCH_PATHS)" mono --debug "$(ENGINE_DIRECTORY)/OpenRA.Utility.exe" $(MOD_ID) --check-yaml
+
+pkg:
+	cd yupgi_alert && bash release.sh
+	bash packaging/package-all.sh 019-Playtest-20170923 `pwd`
